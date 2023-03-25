@@ -3,6 +3,8 @@ import { json } from 'body-parser';
 import mongoose from 'mongoose';
 import 'express-async-errors'
 
+import { NotFoundError } from './errors/not-found-error';
+
 import { encounter } from './routes/encounter';
 import { catchPokemon } from './routes/catchPokemon';
 import { pokedex } from './routes/pokedex';
@@ -16,7 +18,7 @@ app.use('/pokedex/catch', catchPokemon);
 app.use('/pokedex', pokedex);
 
 app.all('*', (req: Request, res: Response) => {
-    res.status(404).send({ message: 'Not found' });
+    throw new NotFoundError();
 });
 
 app.use(handleError);

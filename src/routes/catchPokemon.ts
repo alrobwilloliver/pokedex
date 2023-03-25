@@ -21,7 +21,7 @@ export const catchPokemon = router.post('/',
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        throw new CustomValidationError(400, errors.array());
+        throw new CustomValidationError(errors.array());
     }
     
     const pokemon: Pokemon = req.body;
